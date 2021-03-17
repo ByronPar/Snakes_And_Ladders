@@ -7,6 +7,7 @@ package Inicio;
 
 import java.util.Scanner;
 
+
 /**
  *
  * @author 32379
@@ -36,7 +37,7 @@ public class Inicio {
            String opcion =entrada.nextLine();
            switch(opcion){
                case "1":
-                   System.out.println("Iniciar juego");
+                   
                    break;
                case "2":
                    System.out.println("Regresar a la partida ");
@@ -54,7 +55,7 @@ public class Inicio {
         }catch(Exception e){
             System.out.println("\n\nSelecciono una opción incorrecta , vuelva  a intentarlo");
             iniciar();
-            break;
+            
         }
         
     }
