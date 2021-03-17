@@ -7,7 +7,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-
+*.pdf
 *.jpg
 *.jpeg
 *.jpe
