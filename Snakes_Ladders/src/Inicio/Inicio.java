@@ -5,6 +5,7 @@
  */
 package Inicio;
 
+import Juego.Juego;
 import java.util.Scanner;
 
 
@@ -37,10 +38,11 @@ public class Inicio {
            String opcion =entrada.nextLine();
            switch(opcion){
                case "1":
-                   
+                   Juego.IngresarJugadores();
                    break;
                case "2":
                    System.out.println("Regresar a la partida ");
+                   //Juego.RegresarPartida();
                    break;
                case "3":
                    System.out.println("\n\n         Fin del Programa, Gracias Por Jugar ");
@@ -59,10 +61,6 @@ public class Inicio {
         }
         
     }
-    
-    public void otro(){
-        }
-    
     
     
 }
