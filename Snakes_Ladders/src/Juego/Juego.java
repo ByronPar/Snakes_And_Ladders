@@ -76,7 +76,7 @@ public class Juego {
             System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
             configuracionJuego();
         }else{
-            for()
+            //aksdñl
         }
     }
     
