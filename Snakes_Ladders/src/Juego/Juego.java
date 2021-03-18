@@ -6,6 +6,7 @@
 package Juego;
 
 import beans.Jugador;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -76,7 +77,17 @@ public class Juego {
             System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
             configuracionJuego();
         }else{
-            //aksdñl
+            try{
+                
+            }catch(Exception e){
+                
+            }
+            ArrayList posiciones = new ArrayList();
+            for (int i = 0; i < pos.length; i++) {// recorro cada coordenada x,y
+                String[] momentaneo = pos[i].split(",");
+                posiciones.add(momentaneo[0]);
+                posiciones.add(momentaneo[1]);
+            }
         }
     }
     
