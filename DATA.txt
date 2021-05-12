@@ -1,0 +1,35 @@
+Escalera y serpiente posicion, nobre
+jugador  nombre
+tablero posiciones , jugadores , escaleras y serpientes
+posicion x,y, nombre
+
+
+
+Definición de la solución
+●   Objetivos generales y específicos
+●   Alcances del proyecto
+●   Requerimientos iniciales del sistema
+●   Requerimientos funcionales
+
+● Atributos del sistema
+● Glosario inicial.  -- pasarlo al inicio al final
+● Modelo entidad Relacional.
+
+CASOS DE USO
+  ● Diagrama de casos de uso.
+  ● Casos de uso de alto nivel.
+  ● Casos de uso expandidos
+
+● Diagrama de Secuencias.
+● Diagrama de Estados.
+● Diagrama de clases.
+● Modelo conceptual terminado.
+● Diagrama de Actividades.
+● Diagrama de despliegue incluyendo componentes.
+● Script de creación del esquema de base de datos
+
+mockups del sistema
+
+Planificacion utilizada
+
+20.6
