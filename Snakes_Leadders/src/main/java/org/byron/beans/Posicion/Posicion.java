@@ -1,4 +1,4 @@
-package org.byron.beans;
+package org.byron.beans.Posicion;
 
 public class Posicion {
     private int id;

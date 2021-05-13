@@ -5,9 +5,8 @@
  */
 package org.byron.juego;
 
-import org.byron.beans.Jugador;
+import org.byron.beans.Jugador.Jugador;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 

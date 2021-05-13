@@ -1,5 +1,5 @@
 
-package org.byron.beans;
+package org.byron.beans.Jugador;
 
 public class Jugador {
     private String nombre;
@@ -14,6 +14,15 @@ public class Jugador {
 
     public Jugador() {
 
+    }
+
+    @Override
+    public String toString() {
+        return  id +
+                " | " +
+                nombre +
+                " | " +
+                numero;
     }
 
     public String getNumero() {
