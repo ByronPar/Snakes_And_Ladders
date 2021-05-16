@@ -4,13 +4,7 @@ package org.byron.beans.Jugador;
 public class Jugador {
     private String nombre;
     private int id;
-    private String numero;
-
-    public Jugador(String nombre, int id, String numero) {
-        this.nombre = nombre;
-        this.id = id;
-        this.numero = numero;
-    }
+    private int numero;
 
     public Jugador() {
 
@@ -25,13 +19,6 @@ public class Jugador {
                 numero;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
 
     public int getId() {
         return id;
@@ -50,4 +37,11 @@ public class Jugador {
         this.nombre = nombre;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
 }

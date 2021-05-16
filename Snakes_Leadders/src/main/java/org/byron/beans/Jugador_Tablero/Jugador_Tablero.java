@@ -4,7 +4,7 @@ import org.byron.beans.Jugador.Jugador;
 import org.byron.beans.Tablero.Tablero;
 
 public class Jugador_Tablero {
-    private int id_J_T;
+    private int id;
     private Tablero tablero;
     private Jugador jugador;
 
@@ -13,11 +13,6 @@ public class Jugador_Tablero {
 
     }
 
-    public Jugador_Tablero(int id_J_T, Tablero tablero, Jugador jugador) {
-        this.id_J_T = id_J_T;
-        this.tablero = tablero;
-        this.jugador = jugador;
-    }
 
     public Tablero getTablero() {
         return tablero;
@@ -35,11 +30,11 @@ public class Jugador_Tablero {
         this.jugador = jugador;
     }
 
-    public int getId_J_T() {
-        return id_J_T;
+    public int getId() {
+        return id;
     }
 
-    public void setId_J_T(int id_J_T) {
-        this.id_J_T = id_J_T;
+    public void setId(int id) {
+        this.id = id;
     }
 }

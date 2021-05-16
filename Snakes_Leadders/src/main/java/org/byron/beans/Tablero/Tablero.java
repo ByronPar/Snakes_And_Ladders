@@ -1,41 +1,24 @@
 package org.byron.beans.Tablero;
 
-import org.byron.beans.Escalera.Escalera;
 import org.byron.beans.Jugador_Tablero.Jugador_Tablero;
-import org.byron.beans.Serpiente.Serpiente;
+import org.byron.beans.Posicion.Posicion;
 
 import java.util.ArrayList;
 
 public class Tablero {
-    private int id_tablero;
-    private ArrayList<Escalera> escaleras;
-    private ArrayList<Serpiente> serpientes;
+    private int id;
     private ArrayList<Jugador_Tablero> jugadores;
-
-    public Tablero(int id_tablero, ArrayList<Escalera> escaleras, ArrayList<Serpiente> serpientes, ArrayList<Jugador_Tablero> jugadores) {
-        this.id_tablero = id_tablero;
-        this.escaleras = escaleras;
-        this.serpientes = serpientes;
-        this.jugadores = jugadores;
-    }
+    private Posicion matriz[][] = new Posicion[10][10];
 
     public Tablero() {
     }
 
-    public ArrayList<Escalera> getEscaleras() {
-        return escaleras;
+    public Posicion[][] getMatriz() {
+        return matriz;
     }
 
-    public void setEscaleras(ArrayList<Escalera> escaleras) {
-        this.escaleras = escaleras;
-    }
-
-    public ArrayList<Serpiente> getSerpientes() {
-        return serpientes;
-    }
-
-    public void setSerpientes(ArrayList<Serpiente> serpientes) {
-        this.serpientes = serpientes;
+    public void setMatriz(Posicion[][] matriz) {
+        this.matriz = matriz;
     }
 
     public ArrayList<Jugador_Tablero> getJugadores() {
@@ -46,11 +29,11 @@ public class Tablero {
         this.jugadores = jugadores;
     }
 
-    public int getId_tablero() {
-        return id_tablero;
+    public int getId() {
+        return id;
     }
 
-    public void setId_tablero(int id_tablero) {
-        this.id_tablero = id_tablero;
+    public void setId(int id) {
+        this.id = id;
     }
 }

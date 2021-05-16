@@ -29,35 +29,19 @@ public class JugadorImpl implements RepoJugador<Jugador> {
 
 
     @Override
-    public Jugador porNombre(String nombre) {
-        Jugador j = null;
-        try (PreparedStatement stmt = getConnection().
-                prepareStatement("SELECT * FROM jugador WHERE nombre = ?")) {
-            stmt.setString(1, nombre);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    j = crearJugador(rs);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return j;
-    }
-
-    @Override
     public void guardar(Jugador jugador) {
         String sql;
-        if(jugador.getId()>0)  {
-            sql = "UPDATE jugador SET nombre=?, numero=? WHERE id_jugador=?";
-        }else{
+        Jugador prueba = porNombre(jugador.getNombre());
+        if (prueba != null) {
+            return;
+        } else {
             sql = "INSERT INTO jugador(nombre, numero) VALUES(?,?)";
         }
-        try (PreparedStatement stmt = getConnection().prepareStatement(sql)){
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
             stmt.setString(1, jugador.getNombre());
-            stmt.setString(2, jugador.getNumero());
+            stmt.setInt(2, jugador.getNumero());
 
-            if(jugador.getId()>0){
+            if (jugador.getId() > 0) {
                 stmt.setInt(3, jugador.getId());
             }
             stmt.executeUpdate();
@@ -67,20 +51,27 @@ public class JugadorImpl implements RepoJugador<Jugador> {
     }
 
     @Override
-    public void eliminar(int id) {
-        try (PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM jugador WHERE id_jugador=?")){
-            stmt.setInt(1,id);
-            stmt.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+    public Jugador porNombre(String nombre) {
+        Jugador jugador = null;
+        try (PreparedStatement stmt = getConnection().
+                prepareStatement("SELECT * FROM jugador WHERE nombre = ?")) {
+            stmt.setString(1, nombre);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                jugador = crearJugador(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return jugador;
     }
+
 
     private Jugador crearJugador(ResultSet rs) throws SQLException {
         Jugador p = new Jugador();
-        p.setId(rs.getInt("id_jugador"));
+        p.setId(rs.getInt("id"));
         p.setNombre(rs.getString("nombre"));
-        p.setNumero(rs.getString("numero"));
+        p.setNumero(rs.getInt("numero"));
         return p;
     }
 }
