@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/org/byron/beans/Jugador_Tablero/Jugador_TableroImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/byron/beans/Posicion/PosicionImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/byron/beans/Tablero/TableroImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/byron/beans/Tipo/TipoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/byron/inicio/Inicio.java" dialect="GenericSQL" />
   </component>
 </project>

@@ -10,8 +10,13 @@ import org.byron.beans.Jugador.RepoJugador;
 import org.byron.beans.Jugador_Tablero.Jugador_Tablero;
 import org.byron.beans.Jugador_Tablero.RepoJugador_Tablero;
 import org.byron.beans.Posicion.Posicion;
+import org.byron.beans.Posicion.PosicionImpl;
+import org.byron.beans.Posicion.RepoPosicion;
 import org.byron.beans.Tablero.RepoTablero;
 import org.byron.beans.Tablero.Tablero;
+import org.byron.beans.Tipo.RepoTipo;
+import org.byron.beans.Tipo.Tipo;
+import org.byron.beans.Tipo.TipoImpl;
 import org.byron.conexion.ConexionDB;
 
 import java.util.ArrayList;
@@ -118,31 +123,41 @@ public class Juego {
             configuracionJuego();
         } else {
             try {
-                ArrayList posiciones = new ArrayList();
-                for (int i = 0; i < pos.length; i++) {// recorro cada coordenada x,y
+                RepoTipo<Tipo> tipo = new TipoImpl();
+                RepoPosicion<Posicion> addPos = new PosicionImpl();
+                ArrayList<Posicion> agregar_pos = new ArrayList<>();
+                for (int i = 0; i < pos.length; i++) {   // recorro cada coordenada x,y
                     String[] momentaneo = pos[i].split(",");
                     if (momentaneo.length == 2 && Integer.parseInt(momentaneo[0]) > 0 && Integer.parseInt(momentaneo[1]) <= 10) { // means that all it´s ok
-                        if (serpientes){
-                            ArrayList listaSerpiente = new ArrayList();
-                            Posicion posi = new Posicion();
-                            posi.setCoor_x(Integer.parseInt(momentaneo[0]));
-                            posi.setCoor_y(Integer.parseInt(momentaneo[1]));
-
-                        }else{
-
+                        Posicion posi = new Posicion();
+                        posi.setCoor_x(Integer.parseInt(momentaneo[0]));
+                        posi.setCoor_y(Integer.parseInt(momentaneo[1]));
+                        if (serpientes) {
+                            posi.setTipo(tipo.forName("serpiente"));
+                        } else {
+                            posi.setTipo(tipo.forName("escalera"));
                         }
+                        agregar_pos.add(posi);
+
                     } else {
                         System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
                         configuracionJuego();
                     }
                 }
-                //si culmina all bien, debo crear las serpientes y escaleras del tablero
+                // significa que nos salio bien
+                for (Posicion elemento : agregar_pos) {
+                    addPos.guardar(elemento, tablero.getId());
+                    tablero.addPosicon(elemento);
+                }
+                tablero.llenar_tablero(); // culmino de llenar all my tablero
+                Tiro.continuar();
+
             } catch (Exception e) {
                 System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
                 configuracionJuego();
-//                posiciones.add(momentaneo[0]);
-//                posiciones.add(momentaneo[1]);
             }
         }
     }
+
+
 }
