@@ -9,9 +9,18 @@ public class Posicion {
     private int coor_y;
     private Tipo tipo;
     private Jugador jugador;
+    private String simbolo;
 
     public Posicion() {
 
+    }
+
+    public String getSimbolo() {
+        return simbolo;
+    }
+
+    public void setSimbolo(String simbolo) {
+        this.simbolo = simbolo;
     }
 
     public Tipo getTipo() {

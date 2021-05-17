@@ -18,10 +18,12 @@ public class TipoImpl implements RepoTipo<Tipo> {
         Tipo tipo = null;
         try (PreparedStatement stmt = getConnection().
                 prepareStatement("SELECT * FROM tipo WHERE nombre= ?")) {
+            stmt.setString(1, type_name);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 tipo = crearTipo(rs);
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

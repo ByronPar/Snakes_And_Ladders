@@ -12,8 +12,6 @@ public class Tablero {
     private int id;
     private ArrayList<Jugador_Tablero> jugadores;
     private final Posicion[][] matriz = new Posicion[10][10];
-    private static int fila = 0;
-    private static int columna = 0;
 
     public Tablero() {
     }
@@ -23,25 +21,34 @@ public class Tablero {
     }
 
     public void addPosicon(Posicion new_posicion) {
-        this.matriz[fila][columna] = new_posicion;
-        fila++;
-        columna++;
+        this.matriz[new_posicion.getCoor_x()][new_posicion.getCoor_y()] = new_posicion;
     }
 
     public void llenar_tablero() {
         Tipo algo = new Tipo();
         algo.setNombre("normal");
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 9; i > -1; i--) {
+            for (int j = 9; j > -1; j--) {
                 if (matriz[i][j] == null) {
                     Posicion new_posicion = new Posicion();
                     new_posicion.setCoor_x(i);
                     new_posicion.setCoor_y(j);
                     new_posicion.setTipo(algo);
+                    if (i == 0 && j== 0){
+                        new_posicion.setSimbolo("*");
+                    }else if (i==9 && j==9){
+                        new_posicion.setSimbolo("$");
+                    }else{
+                        new_posicion.setSimbolo(" ");
+                    }
                     matriz[i][j] = new_posicion;
                 }
             }
         }
+    }
+
+    public Posicion get_Posicion(int x, int y) {
+        return matriz[x][y];
     }
 
     public ArrayList<Jugador_Tablero> getJugadores() {

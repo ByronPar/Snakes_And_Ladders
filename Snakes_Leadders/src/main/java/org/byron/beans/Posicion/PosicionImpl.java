@@ -21,7 +21,7 @@ public class PosicionImpl implements  RepoPosicion<Posicion>{
         if(posicion.getId()>0)  {
             sql = "UPDATE posicion SET coor_x=?, coor_y=? WHERE id=?";
         }else{
-            sql = "INSERT INTO posicion(coor_x, coor_y, id_pos_tab. id_tipo) VALUES(?,?,?,?)";
+            sql = "INSERT INTO posicion(coor_x, coor_y, id_pos_tab, id_tipo) VALUES(?,?,?,?)";
         }
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)){
             stmt.setInt(1, posicion.getCoor_x());

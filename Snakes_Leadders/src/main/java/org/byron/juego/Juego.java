@@ -130,12 +130,14 @@ public class Juego {
                     String[] momentaneo = pos[i].split(",");
                     if (momentaneo.length == 2 && Integer.parseInt(momentaneo[0]) > 0 && Integer.parseInt(momentaneo[1]) <= 10) { // means that all it´s ok
                         Posicion posi = new Posicion();
-                        posi.setCoor_x(Integer.parseInt(momentaneo[0]));
-                        posi.setCoor_y(Integer.parseInt(momentaneo[1]));
+                        posi.setCoor_x(Integer.parseInt(momentaneo[0])-1);
+                        posi.setCoor_y(Integer.parseInt(momentaneo[1])-1);
                         if (serpientes) {
                             posi.setTipo(tipo.forName("serpiente"));
+                            posi.setSimbolo("S");
                         } else {
                             posi.setTipo(tipo.forName("escalera"));
+                            posi.setSimbolo("E");
                         }
                         agregar_pos.add(posi);
 
@@ -150,7 +152,7 @@ public class Juego {
                     tablero.addPosicon(elemento);
                 }
                 tablero.llenar_tablero(); // culmino de llenar all my tablero
-                Tiro.continuar();
+                Tiro.llenarTablero();
 
             } catch (Exception e) {
                 System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
