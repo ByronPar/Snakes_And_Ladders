@@ -20,7 +20,7 @@ public class Tablero {
         return matriz;
     }
 
-    public void addPosicon(Posicion new_posicion) {
+    public void addPosicion(Posicion new_posicion) {
         this.matriz[new_posicion.getCoor_x()][new_posicion.getCoor_y()] = new_posicion;
     }
 

@@ -12,7 +12,6 @@ public class Posicion {
     private String simbolo;
 
     public Posicion() {
-
     }
 
     public String getSimbolo() {
@@ -20,7 +19,12 @@ public class Posicion {
     }
 
     public void setSimbolo(String simbolo) {
-        this.simbolo = simbolo;
+        if (simbolo.equals("$") || simbolo.equals("*") || simbolo.equals("S") || simbolo.equals("E") || simbolo.equals(" ")){
+            this.simbolo = simbolo;
+        }else{
+            this.simbolo += ","+simbolo;
+        }
+
     }
 
     public Tipo getTipo() {

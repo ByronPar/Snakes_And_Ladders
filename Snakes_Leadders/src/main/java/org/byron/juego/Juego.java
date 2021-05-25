@@ -18,6 +18,7 @@ import org.byron.beans.Tipo.RepoTipo;
 import org.byron.beans.Tipo.Tipo;
 import org.byron.beans.Tipo.TipoImpl;
 import org.byron.conexion.ConexionDB;
+import org.byron.inicio.Inicio;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,6 +29,9 @@ public class Juego {
     public static Jugador[] Jugadores = new Jugador[3];
     public static int canJugadores;
     static Scanner entrada = new Scanner(System.in);
+    public static RepoTipo<Tipo> tipo = new TipoImpl();
+    public static RepoPosicion<Posicion> addPos = new PosicionImpl();
+    public static ArrayList<Posicion> agregar_pos = new ArrayList<>();
 
     public static void IngresarJugadores() {
 
@@ -105,33 +109,49 @@ public class Juego {
                 + "     \n "
                 + "     \n      Ingrese las coordenas de las escaleras . Ejemplo : x1,y1;x2,y2;x3,y3"
                 + "     \n\n      Solamente puede Ingresar 6 coordenas (x,y) como maximo y 2 como minimo , ingrese valores entre  0 y 10";
-        System.out.println(opciones1);
+        boolean pasar;
+        for (int i = 0; i < 2; i++) {
+            do {
+                if (i == 0) pasar = hacer(opciones1, true);
+                else pasar = hacer(opciones2, false);
+            } while (!pasar);
+            llenar();  //llena los datos
+        }
+        Inicio.iniciar();
 
-        System.out.println(" ");
-        String coordenadas = entrada.nextLine();
-        valCoordenadas(coordenadas, true);
-        System.out.println(opciones2);
-        System.out.println(" ");
-        coordenadas = entrada.nextLine();
-        valCoordenadas(coordenadas, false);
     }
 
-    public static void valCoordenadas(String coordenadas, boolean serpientes) { // metodo para verificar que la información que se haya ingresado haya sido correcta
+    public static boolean hacer(String msj, boolean hacer) {
+        System.out.println(msj);
+        System.out.println(" ");
+        String coordenadas = entrada.nextLine();
+        return valCoordenadas(coordenadas, hacer);
+    }
+
+    public static void llenar() {
+        for (Posicion elemento : agregar_pos) {
+            addPos.guardar(elemento, tablero.getId());// almaceno en base de datos
+            tablero.addPosicion(elemento);    //  almaceno en mi tablero que manejo para jugar
+        }
+        tablero.llenar_tablero(); // culmino de llenar all my tablero
+        Tiro.llenarTablero();
+    }
+
+    public static boolean valCoordenadas(String coordenadas, boolean serpientes) { // metodo para verificar que la información que se haya ingresado haya sido correcta
         String[] pos = coordenadas.split(";");
         if (pos.length < 2 || pos.length > 6) { // solamente verifico que sean >= 2 o <= 6 cooordenadas  “1,2;2,3;4,4”
             System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
-            configuracionJuego();
+            return false;
         } else {
             try {
-                RepoTipo<Tipo> tipo = new TipoImpl();
-                RepoPosicion<Posicion> addPos = new PosicionImpl();
-                ArrayList<Posicion> agregar_pos = new ArrayList<>();
+                addPos = new PosicionImpl();
+                agregar_pos = new ArrayList<>();
                 for (int i = 0; i < pos.length; i++) {   // recorro cada coordenada x,y
                     String[] momentaneo = pos[i].split(",");
                     if (momentaneo.length == 2 && Integer.parseInt(momentaneo[0]) > 0 && Integer.parseInt(momentaneo[1]) <= 10) { // means that all it´s ok
                         Posicion posi = new Posicion();
-                        posi.setCoor_x(Integer.parseInt(momentaneo[0])-1);
-                        posi.setCoor_y(Integer.parseInt(momentaneo[1])-1);
+                        posi.setCoor_x(Integer.parseInt(momentaneo[0]) - 1);
+                        posi.setCoor_y(Integer.parseInt(momentaneo[1]) - 1);
                         if (serpientes) {
                             posi.setTipo(tipo.forName("serpiente"));
                             posi.setSimbolo("S");
@@ -143,23 +163,15 @@ public class Juego {
 
                     } else {
                         System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
-                        configuracionJuego();
+                        return false;
                     }
                 }
-                // significa que nos salio bien
-                for (Posicion elemento : agregar_pos) {
-                    addPos.guardar(elemento, tablero.getId());
-                    tablero.addPosicon(elemento);
-                }
-                tablero.llenar_tablero(); // culmino de llenar all my tablero
-                Tiro.llenarTablero();
-
+                return true;
             } catch (Exception e) {
                 System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
-                configuracionJuego();
+                return false;
             }
         }
     }
-
 
 }

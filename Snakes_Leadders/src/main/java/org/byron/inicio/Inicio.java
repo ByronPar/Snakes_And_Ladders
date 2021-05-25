@@ -1,6 +1,7 @@
 package org.byron.inicio;
 
 import org.byron.juego.Juego;
+import org.byron.juego.Tiro;
 
 import java.util.Scanner;
 
@@ -27,8 +28,7 @@ public class Inicio {
                     Juego.IngresarJugadores();
                     break;
                 case "2":
-                    System.out.println("Regresar a la partida ");
-                    //Juego.RegresarPartida();
+                    Tiro.continuar();
                     break;
                 case "3":
                     System.out.println("\n\n         Fin del Programa, Gracias Por Jugar ");
