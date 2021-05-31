@@ -117,6 +117,7 @@ public class Juego {
             } while (!pasar);
             llenar();  //llena los datos
         }
+        Tiro.llenarTablero();
         Inicio.iniciar();
 
     }
@@ -134,7 +135,6 @@ public class Juego {
             tablero.addPosicion(elemento);    //  almaceno en mi tablero que manejo para jugar
         }
         tablero.llenar_tablero(); // culmino de llenar all my tablero
-        Tiro.llenarTablero();
     }
 
     public static boolean valCoordenadas(String coordenadas, boolean serpientes) { // metodo para verificar que la información que se haya ingresado haya sido correcta

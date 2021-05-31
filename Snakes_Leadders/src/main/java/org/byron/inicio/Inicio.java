@@ -33,11 +33,9 @@ public class Inicio {
                 case "3":
                     System.out.println("\n\n         Fin del Programa, Gracias Por Jugar ");
                     System.exit(0);
-                    break;
                 default:
                     System.out.println("\n\n     Selecciono una opción incorrecta , vuelva  a intentarlo");
                     iniciar();
-                    break;
 
             }
         } catch (Exception e) {

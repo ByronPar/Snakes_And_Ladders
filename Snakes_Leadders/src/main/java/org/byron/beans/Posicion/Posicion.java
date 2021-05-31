@@ -20,7 +20,7 @@ public class Posicion {
 
     public void setSimbolo(String simbolo) {
         if (simbolo.equals("$") || simbolo.equals("*") || simbolo.equals("S") || simbolo.equals("E") || simbolo.equals(" ")){
-            this.simbolo = simbolo;
+            this.simbolo = " "+simbolo+" ";
         }else{
             this.simbolo += ","+simbolo;
         }
