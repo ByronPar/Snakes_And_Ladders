@@ -20,6 +20,10 @@ public class Tablero {
         return matriz;
     }
 
+    public boolean verificarPos(Posicion new_posicion) {
+        return this.matriz[new_posicion.getCoor_x()][new_posicion.getCoor_y()] != null;
+    }
+
     public void addPosicion(Posicion new_posicion) {
         this.matriz[new_posicion.getCoor_x()][new_posicion.getCoor_y()] = new_posicion;
     }
@@ -34,11 +38,11 @@ public class Tablero {
                     new_posicion.setCoor_x(i);
                     new_posicion.setCoor_y(j);
                     new_posicion.setTipo(algo);
-                    if (i == 0 && j== 0){
+                    if (i == 0 && j == 0) {
                         new_posicion.setSimbolo("*");
-                    }else if (i==9 && j==9){
+                    } else if (i == 9 && j == 9) {
                         new_posicion.setSimbolo("$");
-                    }else{
+                    } else {
                         new_posicion.setSimbolo(" ");
                     }
                     matriz[i][j] = new_posicion;

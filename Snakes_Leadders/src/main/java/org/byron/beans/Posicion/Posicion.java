@@ -15,7 +15,17 @@ public class Posicion {
     }
 
     public String getSimbolo() {
-        return simbolo;
+        if (simbolo.length()>1){
+            if (simbolo.length() == 3 ){
+                return "  "+simbolo+"  ";
+            }else if (simbolo.length() ==5){
+                return " "+simbolo+" ";
+            }else{
+                return simbolo;
+            }
+        }else {
+            return "   "+simbolo+"   ";
+        }
     }
 
     public void setSimbolo(String simbolo) {
@@ -26,7 +36,6 @@ public class Posicion {
         }
 
     }
-
     public Tipo getTipo() {
         return tipo;
     }
