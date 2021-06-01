@@ -76,7 +76,6 @@ public class Juego {
                 System.out.println(" ");
                 registroJugadores(num);
             }
-
         }
         RepoJugador<Jugador> conn = ConexionDB.getRepoJugador();
         RepoTablero<Tablero> connt = ConexionDB.getRepoTablero();
@@ -117,8 +116,8 @@ public class Juego {
             } while (!pasar);
             llenar();  //llena los datos
         }
-        Tiro.llenarTablero();
-        Inicio.iniciar();
+        tablero.llenar_tablero(); // culmino de llenar all my tablero
+        Tiro.iniciar();
 
     }
 
@@ -130,11 +129,12 @@ public class Juego {
     }
 
     public static void llenar() {
+        addPos = new PosicionImpl();
         for (Posicion elemento : agregar_pos) {
             addPos.guardar(elemento, tablero.getId());// almaceno en base de datos
             tablero.addPosicion(elemento);    //  almaceno en mi tablero que manejo para jugar
+
         }
-        tablero.llenar_tablero(); // culmino de llenar all my tablero
     }
 
     public static boolean valCoordenadas(String coordenadas, boolean serpientes) { // metodo para verificar que la información que se haya ingresado haya sido correcta
@@ -144,22 +144,31 @@ public class Juego {
             return false;
         } else {
             try {
-                addPos = new PosicionImpl();
                 agregar_pos = new ArrayList<>();
                 for (int i = 0; i < pos.length; i++) {   // recorro cada coordenada x,y
                     String[] momentaneo = pos[i].split(",");
                     if (momentaneo.length == 2 && Integer.parseInt(momentaneo[0]) > 0 && Integer.parseInt(momentaneo[1]) <= 10) { // means that all it´s ok
+                        if ((Integer.parseInt(momentaneo[0]) == 1 && Integer.parseInt(momentaneo[1]) == 1) ||
+                                (Integer.parseInt(momentaneo[0]) == 10 && Integer.parseInt(momentaneo[0]) == 10)) {
+                            System.out.println("        No puede ingresar escaleras o serpientes al inicio o final del tablero.");
+                            return false;
+                        }
                         Posicion posi = new Posicion();
                         posi.setCoor_x(Integer.parseInt(momentaneo[0]) - 1);
                         posi.setCoor_y(Integer.parseInt(momentaneo[1]) - 1);
-                        if (serpientes) {
-                            posi.setTipo(tipo.forName("serpiente"));
-                            posi.setSimbolo("S");
+                        if (!tablero.verificarPos(posi)) {
+                            if (serpientes) {
+                                posi.setTipo(tipo.forName("serpiente"));
+                                posi.setSimbolo("S");
+                            } else {
+                                posi.setTipo(tipo.forName("escalera"));
+                                posi.setSimbolo("E");
+                            }
+                            agregar_pos.add(posi);
                         } else {
-                            posi.setTipo(tipo.forName("escalera"));
-                            posi.setSimbolo("E");
+                            System.out.println("        Coordenada " + (posi.getCoor_x()+1) + "," + (posi.getCoor_y()+1) + "  Ya estaba registrada.");
                         }
-                        agregar_pos.add(posi);
+
 
                     } else {
                         System.out.println("        Error al ingresar coordenadas, vuelva a intentarlo.");
